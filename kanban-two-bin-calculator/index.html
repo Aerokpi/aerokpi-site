@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline'; script-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<title>Kanban and Two-Bin Quantity Calculator (Free) | AeroKPI</title>
+<meta name="description" content="Free kanban calculator. Work out the number of kanban cards and the two-bin quantity from daily usage, replenishment lead time, safety stock and pack size.">
+<link rel="canonical" href="https://aerokpi.com/kanban-two-bin-calculator/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="AeroKPI">
+<meta property="og:title" content="Kanban and Two-Bin Quantity Calculator (Free)">
+<meta property="og:description" content="Free kanban calculator. Work out the number of kanban cards and the two-bin quantity from daily usage, replenishment lead time, safety stock and pack size.">
+<meta property="og:url" content="https://aerokpi.com/kanban-two-bin-calculator/">
+<meta property="og:image" content="https://aerokpi.com/assets/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#0b1b38">
+<link rel="icon" type="image/png" href="../assets/favicon.png">
+<link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
+<link rel="stylesheet" href="../assets/style.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "Kanban and Two-Bin Quantity Calculator", "url": "https://aerokpi.com/kanban-two-bin-calculator/", "applicationCategory": "BusinessApplication", "operatingSystem": "Any (web browser)", "description": "Free kanban calculator. Work out the number of kanban cards and the two-bin quantity from daily usage, replenishment lead time, safety stock and pack size.", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}, "publisher": {"@type": "Organization", "name": "AeroKPI", "url": "https://aerokpi.com/"}}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "What is the kanban formula?", "acceptedAnswer": {"@type": "Answer", "text": "Number of kanbans = (daily demand × lead time × (1 + safety factor)) / container quantity, always rounded up. This is the version most Lean references use."}}, {"@type": "Question", "name": "How do I size a two-bin system?", "acceptedAnswer": {"@type": "Answer", "text": "Each bin must hold enough to cover usage during the full replenishment lead time plus safety stock. Round up to whole packs so the bins are easy to refill."}}, {"@type": "Question", "name": "What safety factor should I use?", "acceptedAnswer": {"@type": "Answer", "text": "10% to 30% is typical when usage is fairly steady. If usage swings a lot from day to day, use the variation method with the standard deviation of daily usage and a service level."}}, {"@type": "Question", "name": "Why always round up?", "acceptedAnswer": {"@type": "Answer", "text": "Rounding down leaves the loop short. You would run out before the replenishment arrives every time demand hits the average."}}, {"@type": "Question", "name": "What does service level mean?", "acceptedAnswer": {"@type": "Answer", "text": "It's the chance of not running out during one replenishment cycle. 95% corresponds to z = 1.645. Higher service levels need more safety stock."}}, {"@type": "Question", "name": "Does this work for supermarkets and line-side racks too?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. Any pull system that reorders on a signal can be sized the same way. Use the time from signal to refill as the lead time."}}]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Free tools", "item": "https://aerokpi.com/"}, {"@type": "ListItem", "position": 2, "name": "Kanban and Two-Bin Quantity Calculator", "item": "https://aerokpi.com/kanban-two-bin-calculator/"}]}</script>
+</head>
+<body class="t-kanban">
+<a class="skip" href="#main">Skip to content</a>
+<header class="top"><div class="wrap">
+<a class="brand" href="../"><img src="../assets/logo-white.png" width="182" height="44" alt="AeroKPI"></a>
+<nav aria-label="Free tools"><a href="../cpk-calculator/">Cpk</a><a href="../oee-calculator/">OEE</a><a href="../fmea-rpn-action-priority-calculator/">RPN / AP</a><a href="../kanban-two-bin-calculator/" aria-current=page>Kanban</a><a href="../dpmo-sigma-level-calculator/">DPMO</a></nav>
+</div></header>
+<main id="main" class="wrap">
+<section class="hero">
+<div class="lead"><p class="eyebrow">Free calculator &middot; AK-04</p><h1>Kanban and Two-Bin Quantity Calculator</h1><p>Size a kanban loop or a two-bin system from four numbers: how much you use per day, how long replenishment takes, how much safety stock you want, and the pack size. The calculator always rounds up, so you don't run out between refills.</p></div>
+<div class="code" aria-hidden="true"><div><span>Tool no.</span><b>AK-04</b></div><div><span>Runs</span><b>In browser</b></div><div><span>Cost</span><b>Free</b></div></div>
+</section>
+<div class="cols">
+<section class="panel" aria-labelledby="calc-h"><h2 id="calc-h"><span class="n">01</span>Calculator</h2>
+<div class="fields">
+<div><label for="demand">Average usage <small>units per day</small></label><input id="demand" type="number" min="0" step="any" value="120"></div>
+<div><label for="lead">Replenishment lead time <small>days</small></label><input id="lead" type="number" min="0" step="any" value="3"></div>
+<div><label for="pack">Container or pack size <small>units, optional</small></label><input id="pack" type="number" min="0" step="1" value="50"></div>
+</div>
+<h3>Safety stock</h3>
+<div class="seg" role="group" aria-label="Safety stock method"><button type="button" id="s-pct" aria-pressed="true">Percent of lead-time demand</button><button type="button" id="s-stat" aria-pressed="false">From usage variation</button></div>
+<div id="box-pct" class="fields"><div><label for="safety">Safety factor <small>%</small></label><input id="safety" type="number" min="0" step="any" value="20"></div></div>
+<div id="box-stat" class="fields" hidden><div><label for="sdd">Std. dev. of daily usage <small>units</small></label><input id="sdd" type="number" min="0" step="any" value="30"></div>
+<div><label for="svc">Service level</label><select id="svc"><option value="0.9">90%</option><option value="0.95" selected>95%</option><option value="0.975">97.5%</option><option value="0.99">99%</option></select><p class="hint" id="o-z"></p></div></div>
+<div class="row"><button type="button" id="calc">Calculate</button></div>
+<p class="err" id="err" role="alert"></p>
+<div class="readout" aria-live="polite">
+<div class="big"><span>Kanban cards</span><b id="o-cards">&mdash;</b></div><div class="big"><span>Qty per bin</span><b id="o-bin">&mdash;</b></div>
+<div><span>Lead-time demand</span><b id="o-ltd">&mdash;</b></div><div><span>Safety stock</span><b id="o-ss">&mdash;</b></div>
+<div><span>Required qty</span><b id="o-req">&mdash;</b></div><div><span>Max on hand (2 bins)</span><b id="o-max">&mdash;</b></div>
+<div><span>Days of cover per bin</span><b id="o-days">&mdash;</b></div>
+</div>
+<div class="verdict" id="verdict" aria-live="polite"></div>
+</section>
+<div>
+<section class="panel plain" aria-labelledby="ex-h"><h2 id="ex-h"><span class="n">02</span>Worked example</h2>
+<div class="example"><p><strong>Fastener at an assembly cell.</strong> 120 used per day, 3-day replenishment loop, 20% safety factor, packs of 50.</p>
+<ul><li>Lead-time demand = 120 &times; 3 = 360</li>
+<li>Safety stock = 360 &times; 20% = 72</li>
+<li>Required = 432, so 432 / 50 = 8.64, rounded up to <strong>9 kanban cards</strong></li>
+<li>Two-bin: <strong>450 per bin</strong> (9 packs), 900 maximum on hand</li></ul>
+<p>Using the variation method instead (&sigma; = 30 per day, 95% service level) gives safety stock of about 85.5 and a required quantity of about 446.</p></div>
+<div class="row"><button type="button" class="ghost" id="load-ex">Load this example</button></div>
+</section>
+<section class="cta" aria-label="Full Excel version">
+<div><h2>Want the full Excel version? See it on Etsy</h2>
+<p>Get the AeroKPI Kanban Two-Bin Calculator Excel template: a ready-to-use workbook for tracking this across all your parts, lines and shifts. Works in Excel, with no macros.</p></div>
+<a class="btn" href="https://www.etsy.com/listing/4597207365" rel="noopener">See it on Etsy &rarr;</a>
+</section>
+
+</div>
+</div>
+<section class="panel plain prose" aria-labelledby="how-h"><h2 id="how-h"><span class="n">03</span>How it works</h2>
+<p>A kanban loop has to hold enough stock to cover usage while a replenishment order is on its way, plus a buffer for variation. The same logic sizes each bin in a two-bin system: when the first bin empties, the second must last until the first comes back full.</p>
+<div class="formula">Lead-time demand = daily usage &times; lead time (days)
+Safety stock     = lead-time demand &times; safety %          (percent method)
+                 = z &times; &sigma;daily &times; &radic;lead time         (variation method)
+Required qty     = lead-time demand + safety stock
+Kanban cards     = roundup(required qty / container size)
+Qty per bin      = roundup(required qty / pack size) &times; pack size</div>
+<p>Lead time means the whole replenishment loop: the time for the empty bin or card to reach the supplier, plus the time to make or pick the parts, plus the time to deliver them back to the point of use. Leaving out the signal time is the most common reason two-bin systems run dry.</p>
+<p>Recalculate when demand or lead time changes by more than about 20%, and at least once a quarter.</p>
+</section>
+<section class="panel plain" aria-labelledby="faq-h"><h2 id="faq-h"><span class="n">04</span>FAQ</h2>
+<details><summary>What is the kanban formula?</summary><p>Number of kanbans = (daily demand &times; lead time &times; (1 + safety factor)) / container quantity, always rounded up. This is the version most Lean references use.</p></details>
+<details><summary>How do I size a two-bin system?</summary><p>Each bin must hold enough to cover usage during the full replenishment lead time plus safety stock. Round up to whole packs so the bins are easy to refill.</p></details>
+<details><summary>What safety factor should I use?</summary><p>10% to 30% is typical when usage is fairly steady. If usage swings a lot from day to day, use the variation method with the standard deviation of daily usage and a service level.</p></details>
+<details><summary>Why always round up?</summary><p>Rounding down leaves the loop short. You would run out before the replenishment arrives every time demand hits the average.</p></details>
+<details><summary>What does service level mean?</summary><p>It's the chance of not running out during one replenishment cycle. 95% corresponds to z = 1.645. Higher service levels need more safety stock.</p></details>
+<details><summary>Does this work for supermarkets and line-side racks too?</summary><p>Yes. Any pull system that reorders on a signal can be sized the same way. Use the time from signal to refill as the lead time.</p></details>
+</section>
+<section class="signup" aria-labelledby="su-h">
+<!-- PLACEHOLDER: not connected to any email service yet. The form has no action and JS blocks submit. -->
+<span class="tag">Placeholder &middot; not connected yet</span>
+<h2 id="su-h">Get new free tools by email</h2>
+<p class="hint">Email signup isn't connected yet, so this form doesn't send or save anything. It's here to show where signup will go.</p>
+<form data-placeholder novalidate>
+<label class="sr" for="su-email">Email address</label>
+<input id="su-email" type="email" placeholder="you@company.com" disabled aria-describedby="su-h">
+<button type="submit" disabled>Notify me (coming soon)</button>
+</form>
+<p class="signup-msg hint" aria-live="polite"></p>
+</section>
+
+<section aria-label="More free tools"><h2><span class="n">+</span>More free tools</h2><div class="related"><a href="../cpk-calculator/">AK-01 Cp / Cpk</a><a href="../oee-calculator/">AK-02 OEE</a><a href="../fmea-rpn-action-priority-calculator/">AK-03 RPN + AP</a><a href="../dpmo-sigma-level-calculator/">AK-05 DPMO / sigma</a></div></section>
+</main>
+<footer class="foot"><div class="wrap">
+<div><strong>AeroKPI</strong> free tools for quality, Lean and manufacturing teams.<br>
+Every calculation runs in your browser. Nothing is uploaded, and this site uses no cookies, analytics or trackers.</div>
+<div>For guidance only. Check results against your own procedures and customer requirements.<br>
+<a href="../">All tools</a> &middot; <a href="https://www.etsy.com/shop/AeroKPI" rel="noopener">AeroKPI templates on Etsy</a></div>
+</div></footer>
+<script src="../assets/calc.js"></script>
+<script src="../assets/js/common.js"></script>
+<script src="../assets/js/kanban.js"></script>
+</body>
+</html>
