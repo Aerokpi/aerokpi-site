@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline'; script-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<title>RPN and AIAG-VDA Action Priority Calculator (FMEA) | AeroKPI</title>
+<meta name="description" content="Free FMEA calculator. Enter severity, occurrence and detection to get the RPN and the AIAG-VDA Action Priority (High, Medium, Low), and see where RPN ranking and AP disagree.">
+<link rel="canonical" href="https://aerokpi.com/fmea-rpn-action-priority-calculator/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="AeroKPI">
+<meta property="og:title" content="RPN and AIAG-VDA Action Priority Calculator (FMEA)">
+<meta property="og:description" content="Free FMEA calculator. Enter severity, occurrence and detection to get the RPN and the AIAG-VDA Action Priority (High, Medium, Low), and see where RPN ranking and AP disagree.">
+<meta property="og:url" content="https://aerokpi.com/fmea-rpn-action-priority-calculator/">
+<meta property="og:image" content="https://aerokpi.com/assets/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#0b1b38">
+<link rel="icon" type="image/png" href="../assets/favicon.png">
+<link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
+<link rel="stylesheet" href="../assets/style.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "RPN and AIAG-VDA Action Priority Checker", "url": "https://aerokpi.com/fmea-rpn-action-priority-calculator/", "applicationCategory": "BusinessApplication", "operatingSystem": "Any (web browser)", "description": "Free FMEA calculator. Enter severity, occurrence and detection to get the RPN and the AIAG-VDA Action Priority (High, Medium, Low), and see where RPN ranking and AP disagree.", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}, "publisher": {"@type": "Organization", "name": "AeroKPI", "url": "https://aerokpi.com/"}}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "What is the difference between RPN and Action Priority?", "acceptedAnswer": {"@type": "Answer", "text": "RPN multiplies the three ratings, so it treats severity, occurrence and detection as equally important. Action Priority uses a lookup table that weights severity most, then occurrence, then detection, so high-severity risks can't be hidden by a good detection score."}}, {"@type": "Question", "name": "Is RPN still allowed?", "acceptedAnswer": {"@type": "Answer", "text": "Many customers still accept RPN, but the AIAG-VDA handbook (2019) replaced it with Action Priority, and many automotive and aerospace customers now expect AP. Check your customer's requirements."}}, {"@type": "Question", "name": "Is there an RPN threshold that requires action?", "acceptedAnswer": {"@type": "Answer", "text": "The AIAG FMEA manuals discourage fixed RPN thresholds such as acting on anything over 100. With AP, every High item needs action or a documented justification."}}, {"@type": "Question", "name": "Does this use the DFMEA or the PFMEA table?", "acceptedAnswer": {"@type": "Answer", "text": "It uses the PFMEA Action Priority table from the AIAG-VDA FMEA Handbook, first edition (2019). The DFMEA table uses the same structure, but the rating criteria behind S, O and D differ."}}, {"@type": "Question", "name": "Why does a severity 9 or 10 item with occurrence 1 come out Low?", "acceptedAnswer": {"@type": "Answer", "text": "In the AIAG-VDA table, occurrence 1 means the failure is practically prevented, so AP is Low for any severity. Many teams still review every severity 9 and 10 item separately, and some customers require it."}}, {"@type": "Question", "name": "Is my data saved?", "acceptedAnswer": {"@type": "Answer", "text": "No. Rows stay in your browser tab and disappear when you close it."}}]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Free tools", "item": "https://aerokpi.com/"}, {"@type": "ListItem", "position": 2, "name": "RPN and AIAG-VDA Action Priority Checker", "item": "https://aerokpi.com/fmea-rpn-action-priority-calculator/"}]}</script>
+</head>
+<body class="t-fmea">
+<a class="skip" href="#main">Skip to content</a>
+<header class="top"><div class="wrap">
+<a class="brand" href="../"><img src="../assets/logo-white.png" width="182" height="44" alt="AeroKPI"></a>
+<nav aria-label="Free tools"><a href="../cpk-calculator/">Cpk</a><a href="../oee-calculator/">OEE</a><a href="../fmea-rpn-action-priority-calculator/" aria-current=page>RPN / AP</a><a href="../kanban-two-bin-calculator/">Kanban</a><a href="../dpmo-sigma-level-calculator/">DPMO</a></nav>
+</div></header>
+<main id="main" class="wrap">
+<section class="hero">
+<div class="lead"><p class="eyebrow">Free calculator &middot; AK-03</p><h1>RPN and AIAG-VDA Action Priority Checker</h1><p>Score each failure mode by severity, occurrence and detection (1 to 10). The checker shows the classic RPN next to the AIAG-VDA Action Priority (High, Medium or Low) and tells you when ranking by RPN would put your actions in the wrong order.</p></div>
+<div class="code" aria-hidden="true"><div><span>Tool no.</span><b>AK-03</b></div><div><span>Runs</span><b>In browser</b></div><div><span>Cost</span><b>Free</b></div></div>
+</section>
+<div class="cols">
+<section class="panel" aria-labelledby="calc-h"><h2 id="calc-h"><span class="n">01</span>Calculator</h2>
+<div class="tw"><table><thead><tr><th>Failure mode</th><th>S</th><th>O</th><th>D</th><th>RPN</th><th>AP</th><th><span class="sr">Remove</span></th></tr></thead><tbody id="rows"></tbody></table></div>
+<div class="row"><button type="button" class="ghost" id="add">+ Add row</button><button type="button" id="calc">Recalculate</button></div>
+<p class="err" id="err" role="alert"></p>
+<div class="verdict" id="verdict" aria-live="polite"></div>
+<h3>Suggested order of work (AP first, then severity)</h3><ol id="order"></ol>
+<div class="tw"><table class="matrix" id="matrix"></table></div>
+</section>
+<div>
+<section class="panel plain" aria-labelledby="ex-h"><h2 id="ex-h"><span class="n">02</span>Worked example</h2>
+<div class="example"><p><strong>Three failure modes from one assembly line:</strong></p>
+<ul><li>Missing weld: S9 O4 D2, RPN <strong>72</strong>, AP <span class="ap H">H</span></li>
+<li>Cosmetic scratch: S3 O8 D3, RPN <strong>72</strong>, AP <span class="ap L">L</span></li>
+<li>Under-torqued fastener: S7 O3 D5, RPN <strong>105</strong>, AP <span class="ap M">M</span></li></ul>
+<p>RPN ranks the torque issue first and calls the weld and the scratch equal. AP puts the missing weld first, because a severity 9 failure that occurs that often needs action no matter how good detection looks.</p></div>
+<div class="row"><button type="button" class="ghost" id="load-ex">Load this example</button></div>
+</section>
+<section class="cta" aria-label="Full Excel version">
+<div><h2>Want the full Excel version? See it on Gumroad</h2>
+<p>Get the AeroKPI PFMEA + Control Plan Excel template: a ready-to-use workbook for tracking this across all your parts, lines and shifts. Works in Excel, with no macros.</p></div>
+<a class="btn" href="https://aerokpi.gumroad.com/l/pfmea-control-plan" rel="noopener">See it on Gumroad &rarr;</a>
+</section>
+
+</div>
+</div>
+<section class="panel plain prose" aria-labelledby="how-h"><h2 id="how-h"><span class="n">03</span>How it works</h2>
+<p><strong>RPN</strong> (risk priority number) is severity &times; occurrence &times; detection, from 1 to 1,000. It is simple, but very different risks can share the same number, and a severity 10 failure can rank below a frequent nuisance.</p>
+<div class="formula">RPN = S &times; O &times; D
+AP  = lookup in the AIAG-VDA table by S band, then O band, then D band</div>
+<p><strong>Action Priority</strong> comes from the 2019 AIAG-VDA FMEA Handbook. Instead of multiplying, it looks up the combination in a table that weights severity first, then occurrence, then detection. <strong>High</strong> means action is required or the team must justify why not. <strong>Medium</strong> means action should be taken. <strong>Low</strong> means action could be taken.</p>
+<p>The table on the left shows the AP lookup for the severity band of the row you are editing, with your rating highlighted. The lookup used here is the process FMEA (PFMEA) table. Your customer's handbook edition and any customer-specific rules take precedence.</p>
+</section>
+<section class="panel plain" aria-labelledby="faq-h"><h2 id="faq-h"><span class="n">04</span>FAQ</h2>
+<details><summary>What is the difference between RPN and Action Priority?</summary><p>RPN multiplies the three ratings, so it treats severity, occurrence and detection as equally important. Action Priority uses a lookup table that weights severity most, then occurrence, then detection, so high-severity risks can't be hidden by a good detection score.</p></details>
+<details><summary>Is RPN still allowed?</summary><p>Many customers still accept RPN, but the AIAG-VDA handbook (2019) replaced it with Action Priority, and many automotive and aerospace customers now expect AP. Check your customer's requirements.</p></details>
+<details><summary>Is there an RPN threshold that requires action?</summary><p>The AIAG FMEA manuals discourage fixed RPN thresholds such as acting on anything over 100. With AP, every High item needs action or a documented justification.</p></details>
+<details><summary>Does this use the DFMEA or the PFMEA table?</summary><p>It uses the PFMEA Action Priority table from the AIAG-VDA FMEA Handbook, first edition (2019). The DFMEA table uses the same structure, but the rating criteria behind S, O and D differ.</p></details>
+<details><summary>Why does a severity 9 or 10 item with occurrence 1 come out Low?</summary><p>In the AIAG-VDA table, occurrence 1 means the failure is practically prevented, so AP is Low for any severity. Many teams still review every severity 9 and 10 item separately, and some customers require it.</p></details>
+<details><summary>Is my data saved?</summary><p>No. Rows stay in your browser tab and disappear when you close it.</p></details>
+</section>
+<section class="signup" aria-labelledby="su-h">
+<!-- PLACEHOLDER: not connected to any email service yet. The form has no action and JS blocks submit. -->
+<span class="tag">Placeholder &middot; not connected yet</span>
+<h2 id="su-h">Get new free tools by email</h2>
+<p class="hint">Email signup isn't connected yet, so this form doesn't send or save anything. It's here to show where signup will go.</p>
+<form data-placeholder novalidate>
+<label class="sr" for="su-email">Email address</label>
+<input id="su-email" type="email" placeholder="you@company.com" disabled aria-describedby="su-h">
+<button type="submit" disabled>Notify me (coming soon)</button>
+</form>
+<p class="signup-msg hint" aria-live="polite"></p>
+</section>
+
+<section aria-label="More free tools"><h2><span class="n">+</span>More free tools</h2><div class="related"><a href="../cpk-calculator/">AK-01 Cp / Cpk</a><a href="../oee-calculator/">AK-02 OEE</a><a href="../kanban-two-bin-calculator/">AK-04 Kanban / two-bin</a><a href="../dpmo-sigma-level-calculator/">AK-05 DPMO / sigma</a></div></section>
+</main>
+<footer class="foot"><div class="wrap">
+<div><strong>AeroKPI</strong> free tools for quality, Lean and manufacturing teams.<br>
+Every calculation runs in your browser. Nothing is uploaded, and this site uses no cookies, analytics or trackers.</div>
+<div>For guidance only. Check results against your own procedures and customer requirements.<br>
+<a href="../">All tools</a> &middot; <a href="https://www.etsy.com/shop/AeroKPI" rel="noopener">AeroKPI templates on Etsy</a></div>
+</div></footer>
+<script src="../assets/calc.js"></script>
+<script src="../assets/js/common.js"></script>
+<script src="../assets/js/fmea.js"></script>
+</body>
+</html>
