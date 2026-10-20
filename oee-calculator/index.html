@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline'; script-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<title>OEE Calculator: Availability, Performance, Quality (Free) | AeroKPI</title>
+<meta name="description" content="Free OEE calculator. Enter shift time, downtime, ideal cycle time and part counts to get availability, performance, quality and OEE, plus the hours lost to each.">
+<link rel="canonical" href="https://aerokpi.com/oee-calculator/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="AeroKPI">
+<meta property="og:title" content="OEE Calculator: Availability, Performance, Quality (Free)">
+<meta property="og:description" content="Free OEE calculator. Enter shift time, downtime, ideal cycle time and part counts to get availability, performance, quality and OEE, plus the hours lost to each.">
+<meta property="og:url" content="https://aerokpi.com/oee-calculator/">
+<meta property="og:image" content="https://aerokpi.com/assets/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#0b1b38">
+<link rel="icon" type="image/png" href="../assets/favicon.png">
+<link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
+<link rel="stylesheet" href="../assets/style.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "OEE Calculator", "url": "https://aerokpi.com/oee-calculator/", "applicationCategory": "BusinessApplication", "operatingSystem": "Any (web browser)", "description": "Free OEE calculator. Enter shift time, downtime, ideal cycle time and part counts to get availability, performance, quality and OEE, plus the hours lost to each.", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}, "publisher": {"@type": "Organization", "name": "AeroKPI", "url": "https://aerokpi.com/"}}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "What is a good OEE score?", "acceptedAnswer": {"@type": "Answer", "text": "85% is often quoted as world class for discrete manufacturing. Many plants are between 40% and 60% when they start measuring honestly. Your own trend matters more than a benchmark."}}, {"@type": "Question", "name": "Should breaks count as downtime?", "acceptedAnswer": {"@type": "Answer", "text": "No. Planned stops such as breaks and scheduled meetings come out of the shift before availability is calculated. Some plants use 'TEEP' when they want to count all calendar time."}}, {"@type": "Question", "name": "Do changeovers count as downtime?", "acceptedAnswer": {"@type": "Answer", "text": "Yes, in standard OEE a changeover is an availability loss. Recording it separately from breakdowns helps you see whether SMED work is worth doing."}}, {"@type": "Question", "name": "Why is my performance over 100%?", "acceptedAnswer": {"@type": "Answer", "text": "The ideal cycle time is set slower than the machine really runs. Use the fastest proven cycle time, not a planning standard that includes allowances."}}, {"@type": "Question", "name": "What counts as a good part?", "acceptedAnswer": {"@type": "Answer", "text": "Only parts that are right the first time. Reworked parts count as quality loss even if they ship in the end."}}, {"@type": "Question", "name": "Is my data uploaded anywhere?", "acceptedAnswer": {"@type": "Answer", "text": "No. Everything is calculated in your browser."}}]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Free tools", "item": "https://aerokpi.com/"}, {"@type": "ListItem", "position": 2, "name": "OEE Calculator", "item": "https://aerokpi.com/oee-calculator/"}]}</script>
+</head>
+<body class="t-oee">
+<a class="skip" href="#main">Skip to content</a>
+<header class="top"><div class="wrap">
+<a class="brand" href="../"><img src="../assets/logo-white.png" width="182" height="44" alt="AeroKPI"></a>
+<nav aria-label="Free tools"><a href="../cpk-calculator/">Cpk</a><a href="../oee-calculator/" aria-current=page>OEE</a><a href="../fmea-rpn-action-priority-calculator/">RPN / AP</a><a href="../kanban-two-bin-calculator/">Kanban</a><a href="../dpmo-sigma-level-calculator/">DPMO</a></nav>
+</div></header>
+<main id="main" class="wrap">
+<section class="hero">
+<div class="lead"><p class="eyebrow">Free calculator &middot; AK-02</p><h1>OEE Calculator</h1><p>Work out Overall Equipment Effectiveness for one shift or one run. You get availability, performance and quality, and the hours lost to each, so you can see which loss is worth fixing first.</p></div>
+<div class="code" aria-hidden="true"><div><span>Tool no.</span><b>AK-02</b></div><div><span>Runs</span><b>In browser</b></div><div><span>Cost</span><b>Free</b></div></div>
+</section>
+<div class="cols">
+<section class="panel" aria-labelledby="calc-h"><h2 id="calc-h"><span class="n">01</span>Calculator</h2>
+<div class="fields">
+<div><label for="shift">Shift length <small>min</small></label><input id="shift" type="number" min="0" step="any" value="480"></div>
+<div><label for="breaks">Planned stops <small>breaks, meetings, min</small></label><input id="breaks" type="number" min="0" step="any" value="60"></div>
+<div><label for="down">Unplanned downtime <small>min</small></label><input id="down" type="number" min="0" step="any" value="47"></div>
+<div><label for="cycle">Ideal cycle time <small>sec per part</small></label><input id="cycle" type="number" min="0" step="any" value="1"></div>
+<div><label for="total">Total parts made</label><input id="total" type="number" min="0" step="1" value="19271"></div>
+<div><label for="good">Good parts <small>first pass</small></label><input id="good" type="number" min="0" step="1" value="18848"></div>
+</div>
+<div class="row"><button type="button" id="calc">Calculate</button></div>
+<p class="err" id="err" role="alert"></p>
+<div class="readout" aria-live="polite">
+<div class="big"><span>OEE</span><b id="o-oee">&mdash;</b></div><div><span>Availability</span><b id="o-a">&mdash;</b></div>
+<div><span>Performance</span><b id="o-p">&mdash;</b></div><div><span>Quality</span><b id="o-q">&mdash;</b></div>
+<div><span>Planned time</span><b id="o-planned">&mdash;</b></div><div><span>Run time</span><b id="o-run">&mdash;</b></div>
+<div><span>Fully productive</span><b id="o-fpt">&mdash;</b></div><div><span>Ideal max parts</span><b id="o-ideal">&mdash;</b></div>
+</div>
+<div class="verdict" id="verdict" aria-live="polite"></div>
+<div class="bars" id="bars" aria-label="Where the planned hours went"></div>
+</section>
+<div>
+<section class="panel plain" aria-labelledby="ex-h"><h2 id="ex-h"><span class="n">02</span>Worked example</h2>
+<div class="example"><p><strong>One 8-hour shift.</strong> 480 min shift, 60 min of planned breaks, 47 min of unplanned downtime, 1.0 s ideal cycle, 19,271 parts made, 18,848 good.</p>
+<ul><li>Availability = 373 / 420 = <strong>88.8%</strong></li>
+<li>Performance = 19,271 s / 22,380 s = <strong>86.1%</strong></li>
+<li>Quality = 18,848 / 19,271 = <strong>97.8%</strong></li>
+<li>OEE = 0.888 &times; 0.861 &times; 0.978 = <strong>74.8%</strong></li></ul>
+<p>In hours, speed loss (0.86 h) is slightly bigger than downtime (0.78 h), so small stops and slow cycles deserve as much attention as breakdowns.</p></div>
+<div class="row"><button type="button" class="ghost" id="load-ex">Load this example</button></div>
+</section>
+<section class="cta" aria-label="Full Excel version">
+<div><h2>Want the full Excel version? See it on Etsy</h2>
+<p>Get the AeroKPI OEE and Downtime Tracker Excel template: a ready-to-use workbook for tracking this across all your parts, lines and shifts. Works in Excel, with no macros.</p></div>
+<a class="btn" href="https://www.etsy.com/listing/4597227374" rel="noopener">See it on Etsy &rarr;</a>
+</section>
+
+</div>
+</div>
+<section class="panel plain prose" aria-labelledby="how-h"><h2 id="how-h"><span class="n">03</span>How it works</h2>
+<p>OEE multiplies three ratios. Each one measures a different kind of loss:</p>
+<div class="formula">Planned time  = shift - planned stops
+Run time      = planned time - unplanned downtime
+Availability  = run time / planned time
+Performance   = (ideal cycle time &times; total parts) / run time
+Quality       = good parts / total parts
+OEE           = availability &times; performance &times; quality</div>
+<p>The bars turn each loss into hours. <strong>Availability loss</strong> is breakdowns, changeovers and waiting for material. <strong>Speed loss</strong> is time when the machine ran but slower than ideal, including small stops nobody logs. <strong>Quality loss</strong> is the machine time spent making scrap and rework. Fully productive time is what is left: good parts made at ideal speed.</p>
+<p>Use the fastest cycle time the machine can sustain as the ideal cycle time, not the standard from the routing. If performance comes out above 100%, the ideal is set too slow.</p>
+</section>
+<section class="panel plain" aria-labelledby="faq-h"><h2 id="faq-h"><span class="n">04</span>FAQ</h2>
+<details><summary>What is a good OEE score?</summary><p>85% is often quoted as world class for discrete manufacturing. Many plants are between 40% and 60% when they start measuring honestly. Your own trend matters more than a benchmark.</p></details>
+<details><summary>Should breaks count as downtime?</summary><p>No. Planned stops such as breaks and scheduled meetings come out of the shift before availability is calculated. Some plants use 'TEEP' when they want to count all calendar time.</p></details>
+<details><summary>Do changeovers count as downtime?</summary><p>Yes, in standard OEE a changeover is an availability loss. Recording it separately from breakdowns helps you see whether SMED work is worth doing.</p></details>
+<details><summary>Why is my performance over 100%?</summary><p>The ideal cycle time is set slower than the machine really runs. Use the fastest proven cycle time, not a planning standard that includes allowances.</p></details>
+<details><summary>What counts as a good part?</summary><p>Only parts that are right the first time. Reworked parts count as quality loss even if they ship in the end.</p></details>
+<details><summary>Is my data uploaded anywhere?</summary><p>No. Everything is calculated in your browser.</p></details>
+</section>
+<section class="signup" aria-labelledby="su-h">
+<!-- PLACEHOLDER: not connected to any email service yet. The form has no action and JS blocks submit. -->
+<span class="tag">Placeholder &middot; not connected yet</span>
+<h2 id="su-h">Get new free tools by email</h2>
+<p class="hint">Email signup isn't connected yet, so this form doesn't send or save anything. It's here to show where signup will go.</p>
+<form data-placeholder novalidate>
+<label class="sr" for="su-email">Email address</label>
+<input id="su-email" type="email" placeholder="you@company.com" disabled aria-describedby="su-h">
+<button type="submit" disabled>Notify me (coming soon)</button>
+</form>
+<p class="signup-msg hint" aria-live="polite"></p>
+</section>
+
+<section aria-label="More free tools"><h2><span class="n">+</span>More free tools</h2><div class="related"><a href="../cpk-calculator/">AK-01 Cp / Cpk</a><a href="../fmea-rpn-action-priority-calculator/">AK-03 RPN + AP</a><a href="../kanban-two-bin-calculator/">AK-04 Kanban / two-bin</a><a href="../dpmo-sigma-level-calculator/">AK-05 DPMO / sigma</a></div></section>
+</main>
+<footer class="foot"><div class="wrap">
+<div><strong>AeroKPI</strong> free tools for quality, Lean and manufacturing teams.<br>
+Every calculation runs in your browser. Nothing is uploaded, and this site uses no cookies, analytics or trackers.</div>
+<div>For guidance only. Check results against your own procedures and customer requirements.<br>
+<a href="../">All tools</a> &middot; <a href="https://www.etsy.com/shop/AeroKPI" rel="noopener">AeroKPI templates on Etsy</a></div>
+</div></footer>
+<script src="../assets/calc.js"></script>
+<script src="../assets/js/common.js"></script>
+<script src="../assets/js/oee.js"></script>
+</body>
+</html>
