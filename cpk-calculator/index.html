@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline'; script-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<title>Cp and Cpk Calculator (Free, with Pp and Ppk) | AeroKPI</title>
+<meta name="description" content="Free Cp, Cpk, Pp and Ppk calculator. Paste your measurements or enter mean and standard deviation, add spec limits, and get capability indices and expected PPM out of spec.">
+<link rel="canonical" href="https://aerokpi.com/cpk-calculator/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="AeroKPI">
+<meta property="og:title" content="Cp and Cpk Calculator (Free, with Pp and Ppk)">
+<meta property="og:description" content="Free Cp, Cpk, Pp and Ppk calculator. Paste your measurements or enter mean and standard deviation, add spec limits, and get capability indices and expected PPM out of spec.">
+<meta property="og:url" content="https://aerokpi.com/cpk-calculator/">
+<meta property="og:image" content="https://aerokpi.com/assets/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#0b1b38">
+<link rel="icon" type="image/png" href="../assets/favicon.png">
+<link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
+<link rel="stylesheet" href="../assets/style.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "Cp and Cpk Calculator", "url": "https://aerokpi.com/cpk-calculator/", "applicationCategory": "BusinessApplication", "operatingSystem": "Any (web browser)", "description": "Free Cp, Cpk, Pp and Ppk calculator. Paste your measurements or enter mean and standard deviation, add spec limits, and get capability indices and expected PPM out of spec.", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}, "publisher": {"@type": "Organization", "name": "AeroKPI", "url": "https://aerokpi.com/"}}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "What is a good Cpk value?", "acceptedAnswer": {"@type": "Answer", "text": "Most customers want at least 1.33 for production characteristics, and 1.67 for safety or key characteristics or during initial approval (PPAP). Below 1.00 means the process is producing parts outside the limits."}}, {"@type": "Question", "name": "What is the difference between Cp and Cpk?", "acceptedAnswer": {"@type": "Answer", "text": "Cp only compares the spread of the process to the tolerance width. Cpk also accounts for where the process is centered. A process can have a high Cp and a low Cpk if it is off target."}}, {"@type": "Question", "name": "What is the difference between Cpk and Ppk?", "acceptedAnswer": {"@type": "Answer", "text": "Cpk uses within (short-term) variation, estimated here from the moving range. Ppk uses overall (long-term) variation, the plain standard deviation of all readings. A big gap between them means the process shifts or drifts over time."}}, {"@type": "Question", "name": "How many measurements do I need?", "acceptedAnswer": {"@type": "Answer", "text": "Use at least 25 to 30 readings, and 100 or more for a reliable capability study. Small samples give unstable Cpk values. Make sure the process is in statistical control before you trust the result."}}, {"@type": "Question", "name": "Can I use this with a one-sided tolerance?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. Leave LSL or USL blank. Cp can't be calculated without both limits, so the calculator reports Cpk as Cpu or Cpl."}}, {"@type": "Question", "name": "Is my data uploaded anywhere?", "acceptedAnswer": {"@type": "Answer", "text": "No. The calculation runs entirely in your browser. Nothing is sent to a server."}}]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Free tools", "item": "https://aerokpi.com/"}, {"@type": "ListItem", "position": 2, "name": "Cp and Cpk Calculator", "item": "https://aerokpi.com/cpk-calculator/"}]}</script>
+</head>
+<body class="t-cpk">
+<a class="skip" href="#main">Skip to content</a>
+<header class="top"><div class="wrap">
+<a class="brand" href="../"><img src="../assets/logo-white.png" width="182" height="44" alt="AeroKPI"></a>
+<nav aria-label="Free tools"><a href="../cpk-calculator/" aria-current=page>Cpk</a><a href="../oee-calculator/">OEE</a><a href="../fmea-rpn-action-priority-calculator/">RPN / AP</a><a href="../kanban-two-bin-calculator/">Kanban</a><a href="../dpmo-sigma-level-calculator/">DPMO</a></nav>
+</div></header>
+<main id="main" class="wrap">
+<section class="hero">
+<div class="lead"><p class="eyebrow">Free calculator &middot; AK-01</p><h1>Cp and Cpk Calculator</h1><p>Check whether a process can hold its tolerance. Paste raw measurements for Cp, Cpk, Pp and Ppk, or enter a mean and standard deviation if you already have them. You also get the expected parts per million outside the limits.</p></div>
+<div class="code" aria-hidden="true"><div><span>Tool no.</span><b>AK-01</b></div><div><span>Runs</span><b>In browser</b></div><div><span>Cost</span><b>Free</b></div></div>
+</section>
+<div class="cols">
+<section class="panel" aria-labelledby="calc-h"><h2 id="calc-h"><span class="n">01</span>Calculator</h2>
+<div class="seg" role="group" aria-label="Input type"><button type="button" id="m-data" aria-pressed="true">Raw measurements</button><button type="button" id="m-stats" aria-pressed="false">Mean and sigma</button></div>
+<div class="fields"><div><label for="lsl">LSL <small>lower spec limit</small></label><input id="lsl" type="number" step="any" inputmode="decimal"></div>
+<div><label for="usl">USL <small>upper spec limit</small></label><input id="usl" type="number" step="any" inputmode="decimal"></div></div>
+<p class="hint">Leave one limit blank for a one-sided spec (for example, a maximum only).</p>
+<div id="box-data"><label for="data">Measurements <small>in production order, separated by spaces, commas or new lines</small></label><textarea id="data" spellcheck="false"></textarea></div>
+<div id="box-stats" hidden><div class="fields"><div><label for="mean">Mean</label><input id="mean" type="number" step="any" inputmode="decimal"></div>
+<div><label for="sd">Standard deviation <small>within</small></label><input id="sd" type="number" step="any" inputmode="decimal" min="0"></div></div></div>
+<div class="row"><button type="button" id="calc">Calculate</button></div>
+<p class="err" id="err" role="alert"></p>
+<div class="readout" aria-live="polite">
+<div class="big"><span>Cpk</span><b id="o-cpk">&mdash;</b></div><div class="big"><span>Cp</span><b id="o-cp">&mdash;</b></div>
+<div><span>Cpu</span><b id="o-cpu">&mdash;</b></div><div><span>Cpl</span><b id="o-cpl">&mdash;</b></div>
+<div><span>Mean</span><b id="o-mean">&mdash;</b></div><div><span>&sigma; within</span><b id="o-sw">&mdash;</b></div>
+<div><span>PPM out (within)</span><b id="o-ppm">&mdash;</b></div><div><span>n</span><b id="o-n">&mdash;</b></div>
+</div>
+<div class="readout" id="pp-cells">
+<div><span>Ppk</span><b id="o-ppk">&mdash;</b></div><div><span>Pp</span><b id="o-pp">&mdash;</b></div>
+<div><span>&sigma; overall</span><b id="o-so">&mdash;</b></div><div><span>PPM out (overall)</span><b id="o-ppmo">&mdash;</b></div>
+</div>
+<div class="verdict" id="verdict" aria-live="polite"></div>
+<canvas id="chart" width="640" height="240" role="img" aria-label="Histogram of measurements with normal curve and spec limits"></canvas>
+</section>
+<div>
+<section class="panel plain" aria-labelledby="ex-h"><h2 id="ex-h"><span class="n">02</span>Worked example</h2>
+<div class="example"><p><strong>Shaft diameter, 10.00 &plusmn; 0.05 mm.</strong> LSL = 9.95, USL = 10.05, mean = 10.012, &sigma; = 0.012.</p>
+<ul><li>Cp = 0.10 / (6 &times; 0.012) = <strong>1.39</strong></li>
+<li>Cpu = (10.05 &minus; 10.012) / 0.036 = <strong>1.06</strong>; Cpl = (10.012 &minus; 9.95) / 0.036 = 1.72</li>
+<li>Cpk = <strong>1.06</strong>, about 770 PPM above the USL</li></ul>
+<p>The spread would pass 1.33, but the process is running 0.012 mm high. Re-centering it lifts Cpk to 1.39 without touching variation.</p></div>
+<div class="row"><button type="button" class="ghost" id="load-ex">Load this example</button></div>
+</section>
+<section class="cta" aria-label="Full Excel version">
+<div><h2>Want the full Excel version? See it on Etsy</h2>
+<p>Get the AeroKPI Cp Cpk Process Capability Excel template: a ready-to-use workbook for tracking this across all your parts, lines and shifts. Works in Excel, with no macros.</p></div>
+<a class="btn" href="https://www.etsy.com/listing/4431620198" rel="noopener">See it on Etsy &rarr;</a>
+</section>
+
+</div>
+</div>
+<section class="panel plain prose" aria-labelledby="how-h"><h2 id="how-h"><span class="n">03</span>How it works</h2>
+<p><strong>Cp</strong> compares the width of the tolerance to the width of the process (six standard deviations). It ignores where the process is centered, so it tells you what you could achieve if you were perfectly on target.</p>
+<p><strong>Cpk</strong> measures the distance from the mean to the nearest spec limit, in units of three standard deviations. If Cpk is much lower than Cp, the process is off center. Move the mean before you spend money on reducing variation.</p>
+<div class="formula">Cp  = (USL - LSL) / (6 &times; &sigma;within)
+Cpu = (USL - mean) / (3 &times; &sigma;within)
+Cpl = (mean - LSL) / (3 &times; &sigma;within)
+Cpk = min(Cpu, Cpl)
+Pp, Ppk: same formulas using &sigma;overall</div>
+<p>With raw data, <strong>&sigma; within</strong> is estimated from the average moving range divided by d2 = 1.128, which is the standard method for individual readings. <strong>&sigma; overall</strong> is the ordinary sample standard deviation. That is why the data needs to stay in production order. Expected PPM assumes a normal distribution.</p>
+<h3>Common targets</h3><ul><li>1.33 is the usual minimum for production characteristics.</li><li>1.67 is common for safety or key characteristics and for new processes (PPAP).</li><li>Always confirm the target in your customer's requirements.</li></ul>
+</section>
+<section class="panel plain" aria-labelledby="faq-h"><h2 id="faq-h"><span class="n">04</span>FAQ</h2>
+<details><summary>What is a good Cpk value?</summary><p>Most customers want at least 1.33 for production characteristics, and 1.67 for safety or key characteristics or during initial approval (PPAP). Below 1.00 means the process is producing parts outside the limits.</p></details>
+<details><summary>What is the difference between Cp and Cpk?</summary><p>Cp only compares the spread of the process to the tolerance width. Cpk also accounts for where the process is centered. A process can have a high Cp and a low Cpk if it is off target.</p></details>
+<details><summary>What is the difference between Cpk and Ppk?</summary><p>Cpk uses within (short-term) variation, estimated here from the moving range. Ppk uses overall (long-term) variation, the plain standard deviation of all readings. A big gap between them means the process shifts or drifts over time.</p></details>
+<details><summary>How many measurements do I need?</summary><p>Use at least 25 to 30 readings, and 100 or more for a reliable capability study. Small samples give unstable Cpk values. Make sure the process is in statistical control before you trust the result.</p></details>
+<details><summary>Can I use this with a one-sided tolerance?</summary><p>Yes. Leave LSL or USL blank. Cp can't be calculated without both limits, so the calculator reports Cpk as Cpu or Cpl.</p></details>
+<details><summary>Is my data uploaded anywhere?</summary><p>No. The calculation runs entirely in your browser. Nothing is sent to a server.</p></details>
+</section>
+<section class="signup" aria-labelledby="su-h">
+<!-- PLACEHOLDER: not connected to any email service yet. The form has no action and JS blocks submit. -->
+<span class="tag">Placeholder &middot; not connected yet</span>
+<h2 id="su-h">Get new free tools by email</h2>
+<p class="hint">Email signup isn't connected yet, so this form doesn't send or save anything. It's here to show where signup will go.</p>
+<form data-placeholder novalidate>
+<label class="sr" for="su-email">Email address</label>
+<input id="su-email" type="email" placeholder="you@company.com" disabled aria-describedby="su-h">
+<button type="submit" disabled>Notify me (coming soon)</button>
+</form>
+<p class="signup-msg hint" aria-live="polite"></p>
+</section>
+
+<section aria-label="More free tools"><h2><span class="n">+</span>More free tools</h2><div class="related"><a href="../oee-calculator/">AK-02 OEE</a><a href="../fmea-rpn-action-priority-calculator/">AK-03 RPN + AP</a><a href="../kanban-two-bin-calculator/">AK-04 Kanban / two-bin</a><a href="../dpmo-sigma-level-calculator/">AK-05 DPMO / sigma</a></div></section>
+</main>
+<footer class="foot"><div class="wrap">
+<div><strong>AeroKPI</strong> free tools for quality, Lean and manufacturing teams.<br>
+Every calculation runs in your browser. Nothing is uploaded, and this site uses no cookies, analytics or trackers.</div>
+<div>For guidance only. Check results against your own procedures and customer requirements.<br>
+<a href="../">All tools</a> &middot; <a href="https://www.etsy.com/shop/AeroKPI" rel="noopener">AeroKPI templates on Etsy</a></div>
+</div></footer>
+<script src="../assets/calc.js"></script>
+<script src="../assets/js/common.js"></script>
+<script src="../assets/js/cpk.js"></script>
+</body>
+</html>
