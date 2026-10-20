@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /shots/
+
+Sitemap: https://aerokpi.com/sitemap.xml
