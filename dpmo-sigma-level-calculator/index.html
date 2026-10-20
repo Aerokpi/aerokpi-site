@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline'; script-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<title>DPMO and Sigma Level Calculator (Free) | AeroKPI</title>
+<meta name="description" content="Free DPMO calculator. Enter units, opportunities and defects to get DPU, DPO, DPMO, yield and sigma level, with or without the 1.5 sigma shift.">
+<link rel="canonical" href="https://aerokpi.com/dpmo-sigma-level-calculator/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="AeroKPI">
+<meta property="og:title" content="DPMO and Sigma Level Calculator (Free)">
+<meta property="og:description" content="Free DPMO calculator. Enter units, opportunities and defects to get DPU, DPO, DPMO, yield and sigma level, with or without the 1.5 sigma shift.">
+<meta property="og:url" content="https://aerokpi.com/dpmo-sigma-level-calculator/">
+<meta property="og:image" content="https://aerokpi.com/assets/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#0b1b38">
+<link rel="icon" type="image/png" href="../assets/favicon.png">
+<link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
+<link rel="stylesheet" href="../assets/style.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "DPMO and Sigma Level Calculator", "url": "https://aerokpi.com/dpmo-sigma-level-calculator/", "applicationCategory": "BusinessApplication", "operatingSystem": "Any (web browser)", "description": "Free DPMO calculator. Enter units, opportunities and defects to get DPU, DPO, DPMO, yield and sigma level, with or without the 1.5 sigma shift.", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}, "publisher": {"@type": "Organization", "name": "AeroKPI", "url": "https://aerokpi.com/"}}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "What is the difference between DPU and DPMO?", "acceptedAnswer": {"@type": "Answer", "text": "DPU counts defects per unit, whatever the unit's complexity. DPMO divides by the number of opportunities, so simple and complex products can be compared on the same scale."}}, {"@type": "Question", "name": "Why is 6 sigma 3.4 DPMO?", "acceptedAnswer": {"@type": "Answer", "text": "That figure includes the 1.5 sigma shift. A process at 6 sigma short-term is assumed to perform at 4.5 sigma long-term, and the normal tail beyond 4.5 sigma is 3.4 per million."}}, {"@type": "Question", "name": "Should I use the 1.5 shift?", "acceptedAnswer": {"@type": "Answer", "text": "Use it if you are comparing with standard Six Sigma tables, and say so in the report. If you measured over a long period that already includes drift, many practitioners report long-term sigma without the shift."}}, {"@type": "Question", "name": "What if I found zero defects?", "acceptedAnswer": {"@type": "Answer", "text": "A sigma level can't be calculated from zero defects. It only means the true rate is low compared with your sample size. Inspect more units before claiming a level."}}, {"@type": "Question", "name": "How do I calculate this in Excel?", "acceptedAnswer": {"@type": "Answer", "text": "DPMO = defects / (units * opportunities) * 1000000. Sigma = NORM.S.INV(1 - DPMO/1000000) + 1.5."}}, {"@type": "Question", "name": "Is my data uploaded anywhere?", "acceptedAnswer": {"@type": "Answer", "text": "No. The calculation runs in your browser."}}]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Free tools", "item": "https://aerokpi.com/"}, {"@type": "ListItem", "position": 2, "name": "DPMO and Sigma Level Calculator", "item": "https://aerokpi.com/dpmo-sigma-level-calculator/"}]}</script>
+</head>
+<body class="t-dpmo">
+<a class="skip" href="#main">Skip to content</a>
+<header class="top"><div class="wrap">
+<a class="brand" href="../"><img src="../assets/logo-white.png" width="182" height="44" alt="AeroKPI"></a>
+<nav aria-label="Free tools"><a href="../cpk-calculator/">Cpk</a><a href="../oee-calculator/">OEE</a><a href="../fmea-rpn-action-priority-calculator/">RPN / AP</a><a href="../kanban-two-bin-calculator/">Kanban</a><a href="../dpmo-sigma-level-calculator/" aria-current=page>DPMO</a></nav>
+</div></header>
+<main id="main" class="wrap">
+<section class="hero">
+<div class="lead"><p class="eyebrow">Free calculator &middot; AK-05</p><h1>DPMO and Sigma Level Calculator</h1><p>Turn a defect count into defects per million opportunities (DPMO) and a sigma level. You can switch the conventional 1.5 sigma shift on or off and convert a sigma level back to DPMO.</p></div>
+<div class="code" aria-hidden="true"><div><span>Tool no.</span><b>AK-05</b></div><div><span>Runs</span><b>In browser</b></div><div><span>Cost</span><b>Free</b></div></div>
+</section>
+<div class="cols">
+<section class="panel" aria-labelledby="calc-h"><h2 id="calc-h"><span class="n">01</span>Calculator</h2>
+<div class="fields">
+<div><label for="units">Units inspected</label><input id="units" type="number" min="0" step="1" value="500"></div>
+<div><label for="opps">Opportunities per unit</label><input id="opps" type="number" min="0" step="1" value="10"></div>
+<div><label for="defects">Defects found</label><input id="defects" type="number" min="0" step="1" value="31"></div>
+</div>
+<p class="hint"><label><input id="shift" type="checkbox" checked style="width:auto"> Apply the 1.5 sigma shift (short-term sigma, the common Six Sigma convention)</label></p>
+<div class="row"><button type="button" id="calc">Calculate</button></div>
+<p class="err" id="err" role="alert"></p>
+<div class="readout" aria-live="polite">
+<div class="big"><span>Sigma level</span><b id="o-sigma">&mdash;</b></div><div class="big"><span>DPMO</span><b id="o-dpmo">&mdash;</b></div>
+<div><span>DPU</span><b id="o-dpu">&mdash;</b></div><div><span>DPO</span><b id="o-dpo">&mdash;</b></div>
+<div><span>Yield (1 - DPO)</span><b id="o-yield">&mdash;</b></div><div><span>First-pass yield est.</span><b id="o-rty">&mdash;</b></div>
+</div>
+<div class="verdict" id="verdict" aria-live="polite"></div>
+<h3>Sigma to DPMO</h3>
+<div class="fields"><div><label for="sig">Sigma level</label><input id="sig" type="number" step="any" value="6"></div><div><label>Result</label><b id="o-conv" style="font-family:var(--mono);font-size:1.3rem">&mdash;</b></div></div>
+<div class="tw"><table id="ref" aria-label="Sigma reference table"></table></div>
+</section>
+<div>
+<section class="panel plain" aria-labelledby="ex-h"><h2 id="ex-h"><span class="n">02</span>Worked example</h2>
+<div class="example"><p><strong>Circuit board inspection.</strong> 500 boards, 10 checked features per board, 31 defects found.</p>
+<ul><li>DPU = 31 / 500 = 0.062</li>
+<li>DPO = 31 / 5,000 = 0.0062</li>
+<li>DPMO = <strong>6,200</strong></li>
+<li>Sigma = NORM.S.INV(0.9938) + 1.5 = 2.50 + 1.5 = <strong>4.00</strong></li></ul>
+<p>For comparison, the standard table gives 6,210 DPMO at exactly 4 sigma, so this line is right at 4 sigma.</p></div>
+<div class="row"><button type="button" class="ghost" id="load-ex">Load this example</button></div>
+</section>
+<section class="cta" aria-label="Full Excel version">
+<div><h2>Want the full Excel version? See it on Etsy</h2>
+<p>Tracking defects and capability over time? The AeroKPI SPC Control Chart and Cpk Excel template charts your data, flags out-of-control points and shows Cp, Cpk, Pp and Ppk side by side. No macros.</p></div>
+<a class="btn" href="https://www.etsy.com/listing/4592946866" rel="noopener">See it on Etsy &rarr;</a>
+</section>
+
+</div>
+</div>
+<section class="panel plain prose" aria-labelledby="how-h"><h2 id="how-h"><span class="n">03</span>How it works</h2>
+<div class="formula">DPU   = defects / units
+DPO   = defects / (units &times; opportunities per unit)
+DPMO  = DPO &times; 1,000,000
+Sigma = NORM.S.INV(1 - DPO) + 1.5        (short-term, with shift)
+Sigma = NORM.S.INV(1 - DPO)              (long-term, no shift)</div>
+<p>An <strong>opportunity</strong> is one place a defect could occur and that you actually check: a dimension, a solder joint, a field on a form. Define opportunities before you count, and keep the definition fixed. Adding opportunities that never fail makes the sigma level look better without improving anything.</p>
+<p>The <strong>1.5 sigma shift</strong> is a convention that assumes a process drifts by about 1.5 standard deviations over the long term. With the shift, 3.4 DPMO is 6 sigma. Without it, 3.4 DPMO is about 4.5 sigma. State which one you use when you report a sigma level.</p>
+<p><strong>First-pass yield estimate</strong> uses e<sup>&minus;DPU</sup>, the Poisson approximation of the share of units with zero defects.</p>
+</section>
+<section class="panel plain" aria-labelledby="faq-h"><h2 id="faq-h"><span class="n">04</span>FAQ</h2>
+<details><summary>What is the difference between DPU and DPMO?</summary><p>DPU counts defects per unit, whatever the unit's complexity. DPMO divides by the number of opportunities, so simple and complex products can be compared on the same scale.</p></details>
+<details><summary>Why is 6 sigma 3.4 DPMO?</summary><p>That figure includes the 1.5 sigma shift. A process at 6 sigma short-term is assumed to perform at 4.5 sigma long-term, and the normal tail beyond 4.5 sigma is 3.4 per million.</p></details>
+<details><summary>Should I use the 1.5 shift?</summary><p>Use it if you are comparing with standard Six Sigma tables, and say so in the report. If you measured over a long period that already includes drift, many practitioners report long-term sigma without the shift.</p></details>
+<details><summary>What if I found zero defects?</summary><p>A sigma level can't be calculated from zero defects. It only means the true rate is low compared with your sample size. Inspect more units before claiming a level.</p></details>
+<details><summary>How do I calculate this in Excel?</summary><p>DPMO = defects / (units * opportunities) * 1000000. Sigma = NORM.S.INV(1 - DPMO/1000000) + 1.5.</p></details>
+<details><summary>Is my data uploaded anywhere?</summary><p>No. The calculation runs in your browser.</p></details>
+</section>
+<section class="signup" aria-labelledby="su-h">
+<!-- PLACEHOLDER: not connected to any email service yet. The form has no action and JS blocks submit. -->
+<span class="tag">Placeholder &middot; not connected yet</span>
+<h2 id="su-h">Get new free tools by email</h2>
+<p class="hint">Email signup isn't connected yet, so this form doesn't send or save anything. It's here to show where signup will go.</p>
+<form data-placeholder novalidate>
+<label class="sr" for="su-email">Email address</label>
+<input id="su-email" type="email" placeholder="you@company.com" disabled aria-describedby="su-h">
+<button type="submit" disabled>Notify me (coming soon)</button>
+</form>
+<p class="signup-msg hint" aria-live="polite"></p>
+</section>
+
+<section aria-label="More free tools"><h2><span class="n">+</span>More free tools</h2><div class="related"><a href="../cpk-calculator/">AK-01 Cp / Cpk</a><a href="../oee-calculator/">AK-02 OEE</a><a href="../fmea-rpn-action-priority-calculator/">AK-03 RPN + AP</a><a href="../kanban-two-bin-calculator/">AK-04 Kanban / two-bin</a></div></section>
+</main>
+<footer class="foot"><div class="wrap">
+<div><strong>AeroKPI</strong> free tools for quality, Lean and manufacturing teams.<br>
+Every calculation runs in your browser. Nothing is uploaded, and this site uses no cookies, analytics or trackers.</div>
+<div>For guidance only. Check results against your own procedures and customer requirements.<br>
+<a href="../">All tools</a> &middot; <a href="https://www.etsy.com/shop/AeroKPI" rel="noopener">AeroKPI templates on Etsy</a></div>
+</div></footer>
+<script src="../assets/calc.js"></script>
+<script src="../assets/js/common.js"></script>
+<script src="../assets/js/dpmo.js"></script>
+</body>
+</html>
